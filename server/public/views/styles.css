@@ -1,19 +1,47 @@
 body{
-    background-color:  rgb(238, 229, 223);
+    background-color: lightskyblue;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 header{
     overflow: hidden;
+  
 }
 
 header img {
-  margin-left: 50%;
-  transform: translateX(-50%);
+ 
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 5px;
   width: 150px;
   
 }
+
       
+#tableSection {
+    margin-top: 30px;
+    padding-left: 50px;
+    padding-right: 50px;
+
+}
+
+#addKoala {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.text_div{
+  display: inline-block;
+  margin-left: 10px;
+  top: 55px;
+  position: relative;
+}
+
+.icon_div{
+  display: inline-block;
+  margin-left: 15px;
+}
+
+#koalaHeader{
+  background-color: violet;
+}
