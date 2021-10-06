@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 //globals
 const PORT = 5000;
-let koalaTestArray = ["koala", "bear"]
+// let koalaTestArray = ["koala", "bear"] just to test routes and returns
 // const koalaRouter = require('./routes/koala.router')
 const pool = require( './modules/pool' );
 
@@ -30,6 +30,13 @@ app.get('/koalas', (req, res)=>{
 })
 
 app.post('/koalas', (req, res)=>{
-  console.log('in post:', req.body)
-  res.send(koalaTestArray);
+  console.log('in post:', req.body);
+  const queryString = 'INSERT INTO koalas (name, gender, age, readyfortransfer, notes) VALUES( $1, $2, $3, $4, $5)';
+  const values = [req.body.name, req.body.age, req.body.gender, req.body.readyForTransfer, req.body.notes];
+  pool.query( queryString, values).then( (results)=>{
+    res.sendStatus( 201);
+  }).catch( (err)=>{
+    console.log( "err");
+    res.sendStatus( 500);
+  })
 })

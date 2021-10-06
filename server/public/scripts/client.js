@@ -1,13 +1,13 @@
 console.log( 'js' );
 
-$( document ).ready( function(){
-  console.log( 'JQ' );
-  // Establish Click Listeners
-  $('#addButton' ).on( 'click', postKoala());
-  // load existing koalas on page load
+$(document).ready(OnReady);
+  
+function OnReady(){
+  $('#addButton').on( 'click', postKoala);
+ 
   getKoalas();
 
-}); // end doc ready
+} // end doc ready
 
 // function setupClickListeners() {
 //   $( '#addButton' ).on( 'click', function(){
@@ -33,8 +33,8 @@ function getKoalas(){
     let el = $( '#viewKoalas' );
     el.empty();
     for( let i=0; i<response.length; i++ ){
-      console.log("WTF:", response[i].readyForTransfer)
-      if(response[i].readyForTransfer === true ){
+      console.log("WTF:", response[i].readyfortransfer)
+      if(response[i].readyfortransfer === true ){
         ready = "Yes"
       }else{
         ready = "No"
@@ -51,18 +51,26 @@ function getKoalas(){
 })
 } // end getKoalas
 
+
+
 function postKoala(){
   let koalaToSend = {
-    name: $('nameIn').val(),
-    age: $('ageIn').val(),
-    gender: $('genderIn').val(),
-    readyForTransfer: $('readyForTransferIn').val(),
-    notes: $('notesIn').val(),
+    name: $('#nameIn').val(),
+    age: $('#ageIn').val(),
+    gender: $('#genderIn').val(),
+    readyfortransfer: $('#readyForTransferIn').val(),
+    notes: $('#notesIn').val(),
   };
-}
-
-function saveKoala( newKoala ){
-  console.log( 'in saveKoala', newKoala );
-  // ajax call to server to get koalas
- 
+console.log('post input:', koalaToSend);
+  $.ajax({
+    method: 'POST',
+    url: '/koalas',
+    data: koalaToSend
+}).then( function( response ){
+    getKoalas();
+    console.log( 'back from POST:', response );
+}).catch( function( err ){
+    alert( 'error adding item' );
+    console.log( err );
+})
 }
