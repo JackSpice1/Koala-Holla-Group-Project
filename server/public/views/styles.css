@@ -1,0 +1,19 @@
+body{
+    background-color:cornflowerblue;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+header{
+    overflow: hidden;
+}
+
+header img {
+  margin-left: 50%;
+  transform: translateX(-50%);
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 150px;
+  
+}
+      
