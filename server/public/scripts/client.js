@@ -29,13 +29,20 @@ function getKoalas(){
 }).then( function( response ){
     console.log( 'back from get with:', response );
     // display on DOM
+    let ready = ""
     let el = $( '#viewKoalas' );
     el.empty();
     for( let i=0; i<response.length; i++ ){
+      console.log("WTF:", response[i].readyForTransfer)
+      if(response[i].readyForTransfer === true ){
+        ready = "Yes"
+      }else{
+        ready = "No"
+      }
         el.append( `<tr><td>${response[i].name}</td>
         <td>${response[i].age}</td>
         <td>${response[i].gender}</td>
-        <td>${response[i].readyForTransfer}</td>
+        <td>` + ready + `</td>
         <td>${response[i].notes}</td></tr>`)
     }
 }).catch( function( err ){

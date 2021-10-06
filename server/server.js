@@ -14,14 +14,19 @@ let koalaTestArray = ["koala", "bear"]
 const pool = require( './modules/pool' );
 
 // Start listening for requests on a specific port
-app.listen(PORT, () => {
+app.listen(PORT, ()=>{
   console.log('listening on port', PORT);
 });
 
 // ROUTES
 app.get('/koalas', (req, res)=>{
-  console.log('in get:', req.body);
-  res.send(koalaTestArray)
+  const queryString = `SELECT * FROM koalas`;
+  pool.query( queryString ).then( (results)=> {
+    res.send(results.rows );
+  }).catch( (err )=>{
+    console.log( err);
+    res.sendStatus( 500);
+  })
 })
 
 app.post('/koalas', (req, res)=>{
