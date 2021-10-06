@@ -30,9 +30,9 @@ app.get('/koalas', (req, res)=>{
 })
 
 app.post('/koalas', (req, res)=>{
-  console.log('in post:', req.body);
+  console.log('/koalas POST:', req.body);
   const queryString = 'INSERT INTO koalas (name, gender, age, readyfortransfer, notes) VALUES( $1, $2, $3, $4, $5)';
-  const values = [req.body.name, req.body.age, req.body.gender, req.body.readyForTransfer, req.body.notes];
+  const values = [req.body.name, req.body.gender, req.body.age, req.body.readyfortransfer, req.body.notes];
   pool.query( queryString, values).then( (results)=>{
     res.sendStatus( 201);
   }).catch( (err)=>{
