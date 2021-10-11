@@ -11,17 +11,6 @@ function OnReady(){
 
 } // end doc ready
 
-// function setupClickListeners() {
-//   $( '#addButton' ).on( 'click', function(){
-//     console.log( 'in addButton on click' );
-//     // get user input and put in an object
-//     // NOT WORKING YET :(
-//     // using a test object 
-//     // call saveKoala with the new obejct
-//     saveKoala( koalaToSend );
-//   }); 
-// }
-
 function getKoalas(){
   console.log( 'in getKoalas' );
   // ajax call to server to get koalas
@@ -108,20 +97,41 @@ function transfer(){
 
 } // end transfer
 
+
 function sendHome (){
   console.log('in sendHome');
+  //sweet alert 2
+  swal.fire({
+    title: 'Are you sure?',
+    text: 'Once removed from database, you cannot recover this koala',
+    icon: 'warning',
+    dangermode: true,
+    confirmButtonText: 'Yes',
+    showCancelButton: true,
+    cancelButtonText: 'No'
+  })
+
+  .then((results)=>{
+    if (results.isConfirmed){
   $.ajax({
     method: 'DELETE',
     url: '/koalas?id=' + $(this).data('id'),
-    }) .then(function(response){
-    console.log('updating to:', response);
-    getKoalas()
+    }).then(function(response){
+      swal.fire("I'm so glad our furry friend found their forever home <3",{
+        icon: "success",
+      });
 
   }).catch(function(err){
     console.log(err);
+    alert(`error deleting koala - see console`);
     
   })
-
+} else {
+  swal.fire("Your koala is remaining here! They will find their home soon!",{
+    icon: "error"
+  });
+}
+})
 }// end sendHome
 
 
