@@ -40,3 +40,27 @@ app.post('/koalas', (req, res)=>{
     res.sendStatus( 500);
   })
 })
+
+app.put( '/koalas', (req,res)=>{
+  console.log('/koalas put:', req.query);
+  const queryString = `UPDATE "koalas" SET readyfortransfer = true WHERE id=${ req.query.id };`
+  pool.query( queryString ).then( ( results )=>{
+    res.sendStatus( 200 );
+}).catch( ( err )=>{
+    console.log( err );
+    res.sendStatus( 500 );
+})
+
+})
+
+app.delete( '/koalas', (req,res)=>{
+  console.log('/koalas sendHome:', req.query);
+  const queryString = `DELETE FROM "koalas" WHERE id=${ req.query.id };`
+  pool.query( queryString ).then( ( results )=>{
+    res.sendStatus( 200 );
+}).catch( ( err )=>{
+    console.log( err );
+    res.sendStatus( 500 );
+})
+
+})
